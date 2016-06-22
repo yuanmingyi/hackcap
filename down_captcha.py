@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 import re
 import requests
@@ -24,8 +25,9 @@ def download_captcha(cap_fn):
 
 
 def main(directory, num):
+    time_str = datetime.now().strftime('%Y%m%d%H%M%S')
     for i in range(0, num):
-        fn = os.path.join(directory, 'cap%03d.png' % i)
+        fn = os.path.join(directory, 'cap_%s_%03d.png' % (time_str, i))
         msg, sid = download_captcha(fn)
         print 'captcha', fn, 'saved'
         print 'msg =', msg
